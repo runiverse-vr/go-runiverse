@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"/><title>Forwarding…</title></head>
+<body>
+<script>
+(function(){
+  function getCookie(name){
+    const m = document.cookie.match('(?:^|; )' + name + '=([^;]*)');
+    return m ? decodeURIComponent(m[1]) : null;
+  }
+  const c = getCookie('utm_params');
+  let query = '';
+  if (c) {
+    try {
+      const obj = JSON.parse(decodeURIComponent(c));
+      const usp = new URLSearchParams(obj).toString();
+      if (usp) query = '?' + usp;
+    } catch(e){ /* ignore */ }
+  }
+  const tally = 'https://forms.runiverse.info/vienna-regular-single' + query;
+  // optional: log to your n8n endpoint before redirecting (fetch async)
+  // fetch('https://n8n.example/webhook/log', {method:'POST', body: JSON.stringify({utm: c})});
+  window.location.replace(tally);
+})();
+</script>
+<p>Redirecting to form…</p>
+</body>
+</html>
