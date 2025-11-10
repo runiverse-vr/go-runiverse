@@ -5,10 +5,10 @@
   <title>Redirecting...</title>
   <script>
     // Ambil semua query parameter
-    const params = new URLSearchParams(window.location.search);
+    const searchParams = new URLSearchParams(window.location.search);
     const utmData = {};
 
-    for (const [key, value] of params.entries()) {
+    for (const [key, value] of searchParams.entries()) {
       if (key.startsWith('utm_')) utmData[key] = value;
     }
 
@@ -17,8 +17,9 @@
       localStorage.setItem('utm_params', JSON.stringify(utmData));
     }
 
-    const params = window.location.search; // ?utm_campaign=ig-bio&utm_source=instagram
-    window.location.href = 'https://runiverse.info/' + params; // query string ikut
+    // Redirect ke homepage Runiverse dengan query string tetap ikut
+    const queryString = window.location.search; // ?utm_campaign=ig-bio&utm_source=instagram
+    window.location.href = 'https://www.runiverse.info/' + queryString;
 
   </script>
 </head>
