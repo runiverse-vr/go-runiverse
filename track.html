@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Tracking…</title>
+<script>
+(function(){
+  // ambil semua param (bisa berisi utm_*)
+  const q = new URLSearchParams(window.location.search);
+  const utm = {};
+  for (const [k,v] of q.entries()) {
+    if (k.startsWith('utm_') || k === 'utm_campaign' || k === 'utm_source') utm[k]=v;
+  }
+  if (Object.keys(utm).length) {
+    const v = encodeURIComponent(JSON.stringify(utm));
+    // set cookie untuk parent domain .runiverse.info sehingga tersedia di subdomains
+    // catatan: domain harus cocok, cookie hanya dikirim di HTTPS (Secure) untuk SameSite=None
+    const expires = new Date(Date.now() + 30*24*60*60*1000).toUTCString(); // 30 hari
+    document.cookie = `utm_params=${v}; Domain=.runiverse.info; Path=/; Expires=${expires}; SameSite=None; Secure`;
+  }
+  // redirect ke homepage tanpa query
+  window.location.replace('https://www.runiverse.info/');
+})();
+</script>
+</head>
+<body>Redirecting…</body>
+</html>
