@@ -4,26 +4,19 @@
   <meta charset="utf-8" />
   <title>Redirecting...</title>
   <script>
-    // Ambil semua query parameter
-    const searchParams = new URLSearchParams(window.location.search);
-    const utmData = {};
+    // Ambil query dari referer (misal halaman Google Sites)
+    const ref = document.referrer;
+    const refQuery = ref && ref.includes("?") ? ref.split("?")[1] : "";
+    const tallyUrl = "https://forms.runiverse.info/vienna-regular-single";
 
-    for (const [key, value] of searchParams.entries()) {
-      if (key.startsWith('utm_')) utmData[key] = value;
+    if (refQuery) {
+      window.location.href = `${tallyUrl}?${refQuery}`;
+    } else {
+      window.location.href = tallyUrl;
     }
-
-    // Simpan ke localStorage
-    if (Object.keys(utmData).length > 0) {
-      localStorage.setItem('utm_params', JSON.stringify(utmData));
-    }
-
-    // Redirect ke homepage Runiverse dengan query string tetap ikut
-    const queryString = window.location.search; // ?utm_campaign=ig-bio&utm_source=instagram
-    window.location.href = 'https://www.runiverse.info/' + queryString;
-
   </script>
 </head>
 <body>
-  Redirecting to Runiverse...
+  Redirecting to Tally...
 </body>
 </html>
