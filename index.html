@@ -4,11 +4,10 @@
   <meta charset="utf-8" />
   <title>Redirecting...</title>
   <script>
-    // Ambil semua query parameter dari URL
+    // Ambil semua query parameter
     const params = new URLSearchParams(window.location.search);
     const utmData = {};
 
-    // Simpan semua utm_ parameter
     for (const [key, value] of params.entries()) {
       if (key.startsWith('utm_')) utmData[key] = value;
     }
@@ -18,7 +17,7 @@
       localStorage.setItem('utm_params', JSON.stringify(utmData));
     }
 
-    // Redirect ke homepage utama
+    // Redirect ke homepage
     window.location.href = 'https://www.runiverse.info/';
   </script>
 </head>
