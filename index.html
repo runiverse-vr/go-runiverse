@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Redirecting...</title>
+  <script>
+    // Ambil semua query parameter dari URL
+    const params = new URLSearchParams(window.location.search);
+    const utmData = {};
+
+    // Simpan semua utm_ parameter
+    for (const [key, value] of params.entries()) {
+      if (key.startsWith('utm_')) utmData[key] = value;
+    }
+
+    // Simpan ke localStorage
+    if (Object.keys(utmData).length > 0) {
+      localStorage.setItem('utm_params', JSON.stringify(utmData));
+    }
+
+    // Redirect ke homepage utama
+    window.location.href = 'https://runiverse.info/';
+  </script>
+</head>
+<body>
+  Redirecting to Runiverse...
+</body>
+</html>
